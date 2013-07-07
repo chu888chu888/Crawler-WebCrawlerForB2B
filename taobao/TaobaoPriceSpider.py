@@ -1,14 +1,14 @@
 from pyquery import PyQuery as pyq
 import sys
 import urllib2
-import urllib
+import json
 
 class TaoBaoPricingSpider:
 	searchUrl = "http://s.taobao.com/search?commend=all&search_type=item&style=list&q="
 	cssPricingClass = ".col .price"
 	cssTitleClass = ".summary a"
 	cssItemClass = "div.row.item.icon-datalink"
-	cssPageCount = "div span.b"
+	MAX_PAGES = 4000;
 
 	def __init__(self, obj):
 		self.url = self.searchUrl+obj;
@@ -20,11 +20,8 @@ class TaoBaoPricingSpider:
 		doc = pyq(input_stream)
 		items = doc(self.cssItemClass)
 
-		page_count = doc(self.cssPageCount)
-		print page_count
-
 		number = 0
-		while len(items) > 0 and number < 4000:
+		while len(items) > 0 and number < self.MAX_PAGES:
 			print len(items)
 			print "getting the page %d" %(number / 40 + 1)
 
@@ -45,11 +42,11 @@ class TaoBaoPricingSpider:
 
 
 	def printResult(self):
-		f = open("result.txt","aw+")
-		for item in self.data:
-			f.writelines(item["title"].encode('utf-8','replace') + "----------------->" + item["price"].encode('utf-8','replace')+"\n")
-
+		f = open("result.txt","aw")
+		item_json = json.dumps(self.data,sort_keys=False, indent=4)
+		f.write(item_json)
 		f.close()
+
 
 item = sys.argv[1]
 myTaobao = TaoBaoPricingSpider(item)
