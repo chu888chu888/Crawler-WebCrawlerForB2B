@@ -1,0 +1,8 @@
+{
+	"url":"http://s.taobao.com/search?commend=all&search_type=item&style=list&q=ipad",
+	"title":".summary a",
+	"item":"div.row.item.icon-datalink",
+	"link":".summary a",
+	"price":".col .price",
+	"outfile":"taobao"
+}

@@ -1,0 +1,8 @@
+{
+	"url":"http://search.jd.com/Search?keyword=ipad&enc=utf-8&area=1",
+	"item":"ul.list-h.clearfix li",
+	"price":".p-price strong",
+	"title":".p-name a",
+	"link":".p-name a",
+	"outfile":"jd"
+}
